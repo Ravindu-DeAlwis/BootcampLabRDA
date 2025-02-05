@@ -1,0 +1,9 @@
+To fix the issue "The deployment failed because a specified file already exists at this location: /var/www/html/index.html"
+you can add additional condition to allow file override.
+
+In appspec.yml file after line 5 add following line:
+
+file_exists_behavior: OVERWRITE
+
+Take into account that yml files are very sensitive on all spaces. Each space before the line matters. 
+Above line starts at the first symbol.
