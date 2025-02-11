@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    container_name: wagtail_web
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=NextGenTech.settings.dev
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    container_name: wagtail_db
+    restart: always
+    environment:
+      POSTGRES_USER: wagtail_user
+      POSTGRES_PASSWORD: wagtail_password
+      POSTGRES_DB: wagtail_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: 
